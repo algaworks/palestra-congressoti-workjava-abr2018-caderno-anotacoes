@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-br"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.thymeleaf.org"
+    layout:decorator="~{layout}">
+<head>    
+    <title>Cadastro anotação</title>
+</head>
+<body>        
+    <th:block layout:fragment="conteudo">
+        <section class="my-4">
+            <div class="container">
+                <h2>Cadastro anotação</h2>
+            </div>
+        </section>
+    
+        <section>            
+            <div class="container">
+                <form method="post" th:object="${anotacao}"
+                    th:action="${#httpServletRequest.getServletPath()}">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                        th:if="${#fields.hasAnyErrors()}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        
+                        <div th:each="erro: ${#fields.detailedErrors()}">
+                            <span th:text="${erro.message}">Mensagem de validação.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-success alert-dismissible fade show" role="alert"
+                        th:if="${!#strings.isEmpty(mensagem)}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        
+                        <span th:text="${mensagem}">Mensagem de sucesso.</span>                       
+                    </div>
+                    
+                    <div class="form-group"
+                        th:if="${anotacao.id}">
+                        <label for="id">Código</label> 
+                        <input type="text" class="form-control-plaintext" disabled 
+                            th:field="*{id}"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="titulo">Título</label> 
+                        <input type="text" class="form-control"
+                            placeholder="Título"
+                            th:field="*{titulo}"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="conteudo">Conteúdo</label> 
+                        <textarea class="form-control" placeholder="Conteúdo"
+                            rows="5"
+                            th:field="*{conteudo}"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </section>
+    </th:block>
+</body>
+</html>
